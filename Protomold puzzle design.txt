@@ -1,0 +1,161 @@
+
+
+
+Multithreading
+-asynctasks
+-event bus auto
+
+4/7
+-sectioned out all the code that returns the valid positionings of a given piece into a method.
+-merged the method that makes a list of anchors into the method that calls it to reduce casting and data packaging.
+-put all solutions into a sublist
+
+goal for 4/14
+ +print out solutions
+ +make TextView scrollable
+ +resolve runtime exception
+-put on git
+-benchmark methods for multithreading
+-put expensive methods into sub-threads
+-calculate and print progress percent
+-code in multiple puzzles
+-put buttons in the beginning to choose puzzle
+-reorder last 3 digits of piece code
+
+green = 24*2 = 48
+purple = 24*2*3 = 144
+orange = 24*2*2*3 = 288
+red = 24*2*2*3 = 288
+yellow = 24*2*2*3 = 288
+black = 24*3*3 = 216
+clear = 24*3*2*3 = 432
+white = 24*3*3*3 = 648
+blue = 24*3*3*3 = 648
+
+-write progress bar by deducting from a list of all possible boards
+-total board space is 2*144*288*288*288*216*432*648*648 = 2.695612495×10²⁰
+2*144*288*288*288*216*432*648*648
+
+216*432*648*648 = 39182082048
+2*144*288*288*288 = 6879707136
+
+2*216*432*648*648 = 78364164096
+288*288*288*6*2*4*3 = 3439853568
+
+            626913312768	8
+	   4701849845760	6
+	  39182082048000	5
+	 235092492288000	3
+	3918208204800000	5
+       62691331276800000	8
+      705277476864000000	9
+     2350924922880000000	3
+    31345665638400000000	4
+   235092492288000000000	3
+
+1849845760
+2082048000
+2492288000
+8204800000
+1276800000
+6864000000
+2880000000
+8400000000
+8000000000
+
+1849845760+2082048000+2492288000+8204800000+1276800000+6864000000+2880000000+8400000000+8000000000
+=42049781760
+
+62+470+3918+23509+391820+6269133+70527747+235092492+3134566563+23509249228 
+=26956124942
+
+           42049781760
++269561249420000000000
+=269561249462049781760
+(2.695612495×10²⁰)
+
+board space = 269561249462049781760 (2.695612495×10²⁰)
+-a 64-bit number can only code 1.844674407×10¹⁹ values.
+
+	Bounding Volume
+		Actual Volume
+			Ratio
+green	48	13	.27
+purple	24	8	.33
+orange	18	9	.50
+red	18	8	.44
+yellow	18	6	.33
+black	16	6	.38
+clear	12	5	.42
+white	8	5	.63
+blue	8	5	.63
+
+-make a blank Board
+-for each Board
+  -do / while
+  // find most conservative NextPiece
+  -for each unused piece
+    -make a NextPiece
+    -fill in list of valid candidates
+    -if this piece won't fit anywhere
+      -abandon board
+  -for each open space
+    -make a NextPiece
+    -fill in list of valid candidates
+    -if this piece won't fit anywhere
+      -abandon board
+  -for the NextPiece with the fewest candidates
+    -generate a set of Boards from the list of candidates to a new list of boards.
+    -serialize, sort pieces, sort boards, and remove duplicate boards.
+  -go to first board in new list.
+  -while pieces remain
+-print solution
+
+class Block {
+  String name;
+  hash of code -> shape
+  String code;
+  char[][][] shape;
+
+  Block (String color) { }
+
+  public void pitchBlock() { }
+
+  public void yawBlock() { }
+
+  public void rollBlock() { }
+
+  public String getCode() { }
+
+  public char[][][] getShape(String code) { }
+}
+
+class Board
+  -a Board is an assembly of pieces on a board.
+    -a list of blocks (including their position and orientation).
+    -a filled in board with all current pieces on them.
+    -a list of missing pieces.
+    -an arraylist of NextPiece's.
+    -an arraylist of Boards to explore on next iteration.
+
+class NextPiece
+  -a block name
+  -or a location
+  -an arraylist of valid block candidates using this block/location.
+  -get quantity
+  -fill candidate list for block (Board)
+    -for all locations
+      -and all orientations
+        -test for collision with the current board.
+          -if no collisions, add current block under list of valid candidates.
+
+  -fill candidate list for location (Board)
+    -for all unused pieces
+      -and all locations
+        -and all orientations
+          -is piece overlapping with query location?
+            -is piece colliding with Board?
+              -add to list of valid candidates.
+
+
+
